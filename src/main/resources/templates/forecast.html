@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Weather forecast</title>
+    </head>
+    <body>
+        <h1>
+            Good day.
+        </h1>
+        <form method="post" action="get_forecast">
+            <label for="city">Enter city name</label>
+            <input name="city_name" id="city" type="text" placeholder="Moscow">
+
+            <p> Choose service<br>
+                <input name="service_name" type="radio" value="apixu">APIXU<br>
+                <input name="service_name" type="radio" value="openweathermap">OpenWeatherMap<br>
+            </p>
+
+            <button type="submit">Check weather</button>
+        </form>
+    </body>
+</html>
