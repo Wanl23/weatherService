@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
     <head>
         <title>Weather forecast</title>
     </head>
@@ -19,13 +19,6 @@
                 </p>
                 <button type="submit">Check weather</button>
             </form>
-        </div>
-        <div>
-            <br>
-            <b th:text=${city}/><br>
-            <b th:text=${t}/><br>
-            <b th:text="${h} != null ? ${h} : ''"/><br>
-            <b th:text="${p} != null ? ${p} : ''"/><br>
         </div>
     </body>
 </html>

@@ -1,6 +1,6 @@
 package app;
 
-import app.service.Router;
+import app.service.ServiceRouter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
 
     @Autowired
-    private Router router;
+    private ServiceRouter serviceRouter;
 
     @GetMapping()
-    public String mainPage(@RequestParam(name="name", required=false) String name, Model model) {
-        model.addAttribute("name", name);
-        return "forecast";
+    public String mainPage() {
+        return "index";
     }
 
     @PostMapping("/get_forecast")
-    public String getWeather(@RequestParam(name = "city_name") String city,
-                             @RequestParam(name = "service_name") String service,
+    public String getWeather(@RequestParam(name = "city_name", required = false) String city,
+                             @RequestParam(name = "service_name", required = false) String service,
                              Model model) {
-        System.out.println(router.getForecast(city, service));
+        model.addAllAttributes(serviceRouter.getForecast(city, service));
         return "forecast";
     }
 }

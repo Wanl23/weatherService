@@ -32,6 +32,7 @@ public class OpenWeatherMapWeatherService implements WeatherForecast {
     }
 
     private Map<String, String> sendAndGet(String city) throws IOException, JSONException {
+        Map<String, String> forecast = new HashMap<>();
         String urlParameters = "q=" + city + "&appid=" + openweathermap_key + "&units=metric";
         URL urlObj = new URL("https://api.openweathermap.org/data/2.5/weather" + "?" + urlParameters);
         URLConnection connection = urlObj.openConnection();
@@ -48,13 +49,11 @@ public class OpenWeatherMapWeatherService implements WeatherForecast {
         }
         is.close();
         String response = sb.toString();
-        Map<String, String> forecast = new HashMap<>();
         JSONObject json = new JSONObject(response);
         JSONObject main = json.getJSONObject("main");
         forecast.put("t", main.getString("temp"));
         forecast.put("p", main.getString("pressure"));
         forecast.put("h", main.getString("humidity"));
-        System.out.println(forecast);
         return forecast;
     }
 }

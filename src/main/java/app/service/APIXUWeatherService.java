@@ -41,7 +41,6 @@ public class APIXUWeatherService implements WeatherForecast {
         connection.setDoInput(true);
         connection.setDoOutput(true);
         connection.connect();
-
         InputStream is = connection.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String line;
@@ -57,7 +56,6 @@ public class APIXUWeatherService implements WeatherForecast {
         forecast.put("t", current.getString("temp_c"));
         forecast.put("p", current.getString("pressure_mb"));
         forecast.put("h", current.getString("humidity"));
-        System.out.println(forecast);
         return forecast;
     }
 }
