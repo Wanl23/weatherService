@@ -2,8 +2,6 @@ package app.service;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -16,31 +14,20 @@ import java.util.Map;
 @PropertySource(value={"classpath:app.properties"})
 @Service
 public class APIXUWeatherService implements WeatherForecast {
-    private static final Logger log = LoggerFactory.getLogger(APIXUWeatherService.class);
 
     @Value("${apixu_key}")
-    public String apixuKey;
+    private String apixuKey;
+    private String url = "https://api.apixu.com/v1/current.json";
 
     @Override
-    public Map<String, String> getForecast(String city) {
-        Map<String, String> forecast = new HashMap<>();
-        try {
-            forecast = sendAndGet(city);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return forecast;
-    }
-
-    private Map<String, String> sendAndGet(String city) throws IOException, JSONException {
-        String urlParameters = "key=" + apixuKey + "&q=" + city;
-        URL urlObj = new URL(" https://api.apixu.com/v1/current.json" + "?" + urlParameters);
+    public Map<String, String> getForecast(String city) throws IOException, JSONException {
+        String urlParameters = "?key=" + apixuKey + "&q=" + city;
+        URL urlObj = new URL( url + urlParameters);
         URLConnection connection = urlObj.openConnection();
         connection.setDoInput(true);
         connection.setDoOutput(true);
         connection.connect();
+
         InputStream is = connection.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String line;

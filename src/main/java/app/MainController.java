@@ -13,19 +13,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 public class MainController {
 
-
     @Autowired
     private ServiceRouter serviceRouter;
 
     @GetMapping()
     public String mainPage() {
-        return "index";
+        return "forecast";
     }
 
-    @PostMapping("/get_forecast")
+    @PostMapping()
     public String getWeather(@RequestParam(name = "city_name", required = false) String city,
-                                   @RequestParam(name = "service_name", required = false) String service,
-                                   Model model) {
+                             @RequestParam(name = "service_name", required = false) String service,
+                             Model model) {
         model.addAllAttributes(serviceRouter.getForecast(city, service));
         model.addAttribute("city_name", city);
         return "forecast";

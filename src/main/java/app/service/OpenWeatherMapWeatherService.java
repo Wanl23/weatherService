@@ -16,25 +16,13 @@ import java.util.Map;
 public class OpenWeatherMapWeatherService implements WeatherForecast {
 
     @Value("${openweathermap_key}")
-    public String openweathermap_key;
+    private String openweathermap_key;
+    private String url = "https://api.openweathermap.org/data/2.5/weather";
 
     @Override
-    public Map<String, String> getForecast(String city) {
-        Map<String, String> forecast = new HashMap<>();
-        try {
-            forecast = sendAndGet(city);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return forecast;
-    }
-
-    private Map<String, String> sendAndGet(String city) throws IOException, JSONException {
-        Map<String, String> forecast = new HashMap<>();
-        String urlParameters = "q=" + city + "&appid=" + openweathermap_key + "&units=metric";
-        URL urlObj = new URL("https://api.openweathermap.org/data/2.5/weather" + "?" + urlParameters);
+    public Map<String, String> getForecast(String city) throws IOException, JSONException {
+        String urlParameters = "?q=" + city + "&appid=" + openweathermap_key + "&units=metric";
+        URL urlObj = new URL(url + urlParameters);
         URLConnection connection = urlObj.openConnection();
         connection.setDoInput(true);
         connection.setDoOutput(true);
@@ -49,6 +37,7 @@ public class OpenWeatherMapWeatherService implements WeatherForecast {
         }
         is.close();
         String response = sb.toString();
+        Map<String, String> forecast = new HashMap<>();
         JSONObject json = new JSONObject(response);
         JSONObject main = json.getJSONObject("main");
         forecast.put("t", main.getString("temp"));

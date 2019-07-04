@@ -9,7 +9,7 @@
                 Good day. <br>
                 Welcome you on weather forecast service. Here you can check weather in any city.
             </h1>
-            <form method="post" action="get_forecast">
+            <form method="post" action="">
                 <label for="city">Enter city name</label>
                 <input name="city_name" id="city" type="text" placeholder="Moscow" th:value="${city_name}">
                 <p>
@@ -33,10 +33,14 @@
         </div>
         <div>
             <br>
-            <b th:text=${city}/><br>
-            <b th:text=${t}/><br>
+            <b th:text="${city}"/><br>
+            <b th:text="${t}"/><br>
             <b th:text="${h} != null ? ${h} : ''"/><br>
             <b th:text="${p} != null ? ${p} : ''"/><br>
         </div>
+        <hr>
+        <b>
+            All rights reserved.
+        </b>
     </body>
 </html>
