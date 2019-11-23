@@ -25,7 +25,7 @@ public class OpenWeatherMapWeatherService implements WeatherForecast {
 
     @Override
     public Map<String, String> getForecast(String city) throws IOException, JSONException {
-        String urlParameters = "?q=" + city + "&appid=" + openweathermap_key + "&units=metric";
+        String urlParameters = "?q=" + city + "&appid=" + "5db4458c1ed074f12534841cc90cfbeb" + "&units=metric";
         URL urlObj = new URL(url + urlParameters);
         URLConnection connection = urlObj.openConnection();
         connection.setDoInput(true);

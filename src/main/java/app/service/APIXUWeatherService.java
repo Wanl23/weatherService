@@ -21,7 +21,7 @@ public class APIXUWeatherService implements WeatherForecast {
 
     @Override
     public Map<String, String> getForecast(String city) throws IOException, JSONException {
-        String urlParameters = "?key=" + apixuKey + "&q=" + city;
+        String urlParameters = "?key=" + "e367dddb707143d6a11182604190207" + "&q=" + city;
         URL urlObj = new URL( url + urlParameters);
         URLConnection connection = urlObj.openConnection();
         connection.setDoInput(true);
